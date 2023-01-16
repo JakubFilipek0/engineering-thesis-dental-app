@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+
+<body>
+    <div class="navB">
+        <ul th:replace="navBar :: navBar"></ul>
+    </div>
+
+    <div class="outter">
+        <div class="inner">
+            <h1 style="font-size: 30px;
+            color: white;
+            background: black;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            margin-bottom: 10px;">Historia leczenia zęba</h1>
+
+            <div class="formInner">
+                <form th:action="@{/dentist/appointment/details/teeth/save}" method="POST" th:object="${teeth}">
+                    <input type="text" placeholder="Co zostało zrobione" th:field="${teeth.description}"
+                        required="required" style="margin-top: 10px; margin-bottom: 10px; width: 80%;">
+                    <br>
+                    <input type="submit" value="Zatwierdź" style="margin-bottom: 10px; width: 80%">
+
+                </form>
+            </div>
+
+        </div>
+
+        <br>
+
+        <div class="inner2">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Godzina</th>
+                        <th>Stomatolog</th>
+                        <th>Opis</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="teethList : ${teethList}">
+                        <td th:text="${#dates.format(teethList.appointment.dateOfAppointment, 'dd-MM-yyyy')}"></td>
+                        <td th:text="${teethList.appointment.hourOfAppointment}"></td>
+                        <td
+                            th:text="${teethList.appointment.dentist.name + ' ' + teethList.appointment.dentist.surname}">
+                        </td>
+                        <td th:text="${teethList.description}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+</body>
+
+</html>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&family=Poppins:wght@400;500;600&display=swap');
+
+    * {
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+        font-size: medium;
+        text-align: center;
+    }
+
+    body {
+        background: linear-gradient(120deg, #2980b9, #8e44ad);
+    }
+
+    .outter {
+        width: 100%;
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .inner {
+        display: inline-block;
+        border-radius: 10px;
+        width: 50%;
+
+    }
+
+    .formInner {
+        background: #e7eac4;
+    }
+
+    .inner2 {
+        display: inline-block;
+        background: #e7eac4;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        width: 50%;
+
+    }
+
+    table,
+    th,
+    td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+
+    th,
+    td {
+        padding: 10px;
+        text-align: center;
+    }
+
+    th {
+        background-color: black;
+        color: white;
+        width: 50%;
+    }
+
+    td {
+        background-color: #e7eac4;
+    }
+</style>

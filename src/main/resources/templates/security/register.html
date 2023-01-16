@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Rejestracja</title>
+  <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+
+<body>
+  <div class="navB">
+    <ul th:replace="navBar :: navBar"></ul>
+  </div>
+
+  <div class="outter">
+
+    <div class="inner">
+      <h1 style="font-size: 30px;
+            color: white;
+            background: black;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            margin-bottom: 10px;">Rejestracja</h1>
+      <div class="formInner">
+        <form th:action="@{/register/save}" th:object="${newAccount}" enctype="multipart/form-data" method="POST">
+          <div th:if="${ifUserExist == true}">
+            <small style="color: white; background-color: red;">Użytkownik z taką nazwą użytkownika lub e-mailem
+              istnieje</small>
+          </div>
+
+          <div th:if="${passwordTooSimple == true}">
+            <small style="color: white; background-color: red;">
+              Hasło wymaga przynajmniej:
+              <br>
+              - 1 wielkiej litery,
+              <br>
+              - 1 małej litery,
+              <br>
+              - 1 cyfry,
+              <br>
+              - długości minimum 10 znaków
+            </small>
+          </div>
+          <input type="text" id="username" required="required" th:field="${newAccount.username}"
+            placeholder="Nazwa użytkownika" style="margin-top: 10px; width: 80%">
+          <input style="margin-top: 10px; width: 80%" type="text" id="name" required="required"
+            th:field="${newAccount.name}" placeholder="Imię">
+          <input style="margin-top: 10px; width: 80%" type="text" id="surname" required="required"
+            th:field="${newAccount.surname}" placeholder="Nazwisko">
+          <input style="margin-top: 10px; width: 80%" type="password" id="password" required="required"
+            th:field="${newAccount.password}" placeholder="Hasło">
+          <input style="margin-top: 10px; width: 80%" type="email" id="email" required="required"
+            th:field="${newAccount.email}" placeholder="E-mail">
+          <button style="margin-top: 10px; width: 80%" type="submit" class="btn btn-primary">Zarejestruj</button>
+        </form>
+        <form th:action="@{/login}" method="GET">
+          <div>
+            <input style="margin-top: 10px; width: 80%; margin-bottom: 10px" type="submit"
+              value="Masz konto? Zaloguj się">
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</body>
+
+</html>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&family=Poppins:wght@400;500;600&display=swap');
+
+  * {
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+    font-size: medium;
+  }
+
+  body {
+    background: linear-gradient(120deg, #2980b9, #8e44ad);
+  }
+
+  .outter {
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .inner {
+    display: inline-block;
+    border-radius: 10px;
+    width: 30%;
+
+  }
+
+  .formInner {
+    background: #e7eac4;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+</style>

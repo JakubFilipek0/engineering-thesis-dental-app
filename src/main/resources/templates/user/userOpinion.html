@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+
+<body>
+    <div class="navB">
+        <ul th:replace="navBar :: navBar"></ul>
+    </div>
+
+    <div class="outter">
+        <div class="inner">
+            <h1 style="font-size: 30px;
+            color: white;
+            background: black;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            margin-bottom: 10px;">Wystaw opinie</h1>
+            <div class="formInner">
+                <form th:action="@{/user/opinion/save}" th:object="${opinion}" method="POST">
+                    <input style="margin-top: 10px; margin-bottom: 10px; width: 80%;" placeholder="Opinia" required="required" th:field="${opinion.content}">
+                    <br>
+                    <input style="margin-bottom: 10px; width: 80%;" type="number" cols="5" step="0.5" max="5" min="1" th:field="${opinion.rate}">
+                    <br>
+                    <input type="submit" value="Zatwierdź" style="margin-bottom: 10px; width: 80%">
+
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&family=Poppins:wght@400;500;600&display=swap');
+
+    * {
+        font-size: medium;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+    }
+
+    body {
+        background: linear-gradient(120deg, #2980b9, #8e44ad);
+    }
+
+    .outter {
+        width: 100%;
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .inner {
+        display: inline-block;
+        border-radius: 10px;
+        width: 50%;
+    }
+
+    .formInner {
+        background: #e7eac4;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+</style>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Admin home</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+
+<body>
+    <div class="navB">
+        <ul th:replace="navBar :: navBar"></ul>
+    </div>
+
+    <div class="outter">
+        <div class="inner">
+            <h1 style="font-size: 30px;
+            color: white;
+            background: black;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            margin-bottom: 10px;">Panel administracyjny</h1>
+
+            <div class="formInner">
+                <strong>Dodaj stomatologa</strong>
+                <form th:action="@{/admin/saveNewDentist}" th:object="${newDentist}" method="POST">
+                    <div th:if="${passwordTooSimple == true}">
+                        <small style="color: white; background-color: red;">
+                            Hasło wymaga przynajmniej:
+                            <br>
+                            - 1 wielkiej litery,
+                            <br>
+                            - 1 małej litery,
+                            <br>
+                            - 1 cyfry,
+                            <br>
+                            - długości minimum 10 znaków
+                        </small>
+                    </div>
+
+                    <div th:if="${userExist == true}">
+                        <small style="color: white; background-color: red;">Użytkownik z taką nazwą użytkownika lub
+                            e-mailem
+                            istnieje</small>
+                    </div>
+
+                    <input style="margin-top: 10px; width: 80%" type="text" placeholder="Nazwa użytkownika"
+                        required="required" th:field="${newDentist.username}">
+                    <br>
+                    <input style="margin-top: 10px; width: 80%" type="text" placeholder="Imię" required="required"
+                        th:field="${newDentist.name}">
+                    <br>
+                    <input style="margin-top: 10px; width: 80%" type="text" placeholder="Nazwisko" required="required"
+                        th:field="${newDentist.surname}">
+                    <br>
+                    <input style="margin-top: 10px; width: 80%" type="password" placeholder="Hasło" required="required"
+                        th:field="${newDentist.password}">
+                    <br>
+                    <input style="margin-top: 10px; width: 80%" type="email" placeholder="E-mail" required="required"
+                        th:field="${newDentist.email}">
+                    <br>
+                    <input style="margin-top: 10px; margin-bottom: 10px; width: 80%" type="submit" value="Utwórz">
+
+                </form>
+            </div>
+
+            <div class="inner2">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Imię</th>
+                            <th>Nazwisko</th>
+                            <th>Nazwa użytkownika</th>
+                            <th>E-mail</th>
+                            <!-- <th>Akcja</th> -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="dentistList : ${dentistList}">
+                            <td th:text="${dentistList.name}"></td>
+                            <td th:text="${dentistList.surname}"></td>
+                            <td th:text="${dentistList.username}"></td>
+                            <td th:text="${dentistList.email}"></td>
+                            <!-- <td>
+                                <a type="button" class="btn"
+                                    th:href="@{/admin/deleteDentist/{userId}(userId=${dentistList.userId})}">Usuń</a>
+                            </td> -->
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&family=Poppins:wght@400;500;600&display=swap');
+
+    * {
+        font-size: medium;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+    }
+
+    body {
+        background: linear-gradient(120deg, #2980b9, #8e44ad);
+    }
+
+    .outter {
+        width: 100%;
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .inner {
+        display: inline-block;
+        border-radius: 10px;
+        width: 50%;
+
+    }
+
+    .formInner {
+        background: #e7eac4;
+    }
+
+    .inner2 {
+        display: inline-block;
+        background: #e7eac4;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    table,
+    th,
+    td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+
+    th,
+    td {
+        padding: 10px;
+        text-align: center;
+    }
+
+    th {
+        background-color: black;
+        color: white;
+        width: 50%;
+    }
+
+    td {
+        background-color: #e7eac4;
+    }
+
+    .btn {
+        background-color: red;
+        color: white;
+        border-radius: 2px;
+        text-decoration: none;
+    }
+</style>

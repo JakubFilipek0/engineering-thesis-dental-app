@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet"  th:href="@{../static/style.css}">
+    <!-- <link rel="stylesheet" href="../static/style.css"> -->
+</head>
+
+<body>
+    <ul th:fragment="navBar" class="navBar">
+        <li><a href="/">Strona główna</a></li>
+        <li sec:authorize="hasAnyRole('USER', 'DENTIST')"><a href="/blog">Blog</a></li>
+        <li sec:authorize="hasRole('DENTIST')"><a href="/blog/addBlog">Dodaj bloga</a></li>
+        <li sec:authorize="hasRole('USER')"><a href="/appointment/chooseDentist">Umów wizytę</a></li>
+        <li sec:authorize="hasAnyRole('USER', 'DENTIST')"><a th:href="@{/editProfile/{userId}(userId=${userId})}">Edycja
+                profilu</a></li>
+        <li sec:authorize="hasAnyRole('USER', 'DENTIST')"><a href="/appointment/history">Historia</a></li>
+        <li sec:authorize="isAuthenticated()"><a href="/redirect">Profil</a></li>
+        <li sec:authorize="hasRole('DENTIST')"><a href="/dentist/mySchedule">Mój plan</a></li>
+        <li sec:authorize="isAuthenticated()" style="float: right;"><a href="/logout">Wyloguj się</a></li>
+        <li sec:authorize="isAnonymous()" style="float: right;"><a href="/login">Zaloguj się</a></li>
+        <li sec:authorize="isAnonymous()" style="float: right;"><a href="/register">Zarejestruj się</a></li>
+    </ul>
+</body>
+
+</html>

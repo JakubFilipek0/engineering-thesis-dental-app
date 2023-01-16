@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Edycja profilu</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+
+<body>
+
+    <div class="navB">
+        <ul th:replace="navBar :: navBar"></ul>
+    </div>
+
+    <div class="outter">
+        <div class="inner">
+            <h1 style="font-size: 30px;
+                    color: white;
+                    background: black;
+                    border-top-left-radius: 10px;
+                    border-top-right-radius: 10px;
+                    margin-bottom: 10px;">Zmiana danych konta
+            </h1>
+
+            <div class="formInner">
+                <form action="#" th:action="@{/saveUser}" th:object="${user}" method="POST">
+                    <div th:if="${oldPasswordMatch == true}">
+                        <small style="color: white; background-color: red;">
+                            Obecne hasło nie jest poprawne
+                        </small>
+                    </div>
+                    <!-- <div th:if="${passwordSameAsOld == true}">
+                        <small style="color: white; background-color: red;">
+                            Nowe hasło jest takie samo jak stare
+                        </small>
+                    </div> -->
+                    <div th:if="${passwordComplexity == true}">
+                        <small style="color: white; background-color: red;">
+                            Nowe hasło wymaga przynajmniej:
+                            <br>
+                            - 1 wielkiej litery,
+                            <br>
+                            - 1 małej litery,
+                            <br>
+                            - 1 cyfry,
+                            <br>
+                            - długości minimum 10 znaków
+                        </small>
+                    </div>
+
+                    <div th:if="${passwordPreviouslyUsed == true}">
+                        <small style="color: white; background-color: red;">
+                            Nowe hasło zostało już kiedyś użyte. W celach bezpieczeństwa użyj innego nowego hasła
+                        </small>
+                    </div>
+                    <input type="hidden" th:field="*{userId}" />
+                    <input type="hidden" th:field="*{role}" />
+                    <input type="hidden" th:field="*{name}" />
+                    <input type="hidden" th:field="*{surname}" />
+                    <input type="hidden" th:field="*{email}" />
+                    <input type="hidden" th:field="*{username}">
+                    <input style="margin-top: 10px; width: 80%;" type="password" th:name="oldPassword"
+                        placeholder="Obecne hasło" required="required">
+                    <input style="margin-top: 10px; width: 80%;" type="password" th:name="newPassword"
+                        placeholder="Nowe hasło" required="required" />
+                    <br>
+                    <button type="submit" style="margin-bottom: 10px; margin-top: 10px; width: 80%">Zapisz
+                        zmiany</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&family=Poppins:wght@400;500;600&display=swap');
+
+    * {
+        font-size: medium;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+    }
+
+    body {
+        background: linear-gradient(120deg, #2980b9, #8e44ad);
+    }
+
+    .outter {
+        width: 100%;
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .inner {
+        display: inline-block;
+        border-radius: 10px;
+        width: 50%;
+
+    }
+
+    .formInner {
+        background: #e7eac4;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+</style>

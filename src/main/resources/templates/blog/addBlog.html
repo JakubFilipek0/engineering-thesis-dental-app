@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Dodaj blog</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+
+<body>
+    <div class="navB">
+        <ul th:replace="navBar ::navBar"></ul>
+    </div>
+
+    <div class="center">
+        <h1>Dodaj post na bloga</h1>
+        <form th:action="@{/blog/addBlog/save}" th:object="${blog}" method="POST" enctype="multipart/form-data">
+            <div>
+                <input type="text" id="title" required="required" th:field="${blog.title}" placeholder="Tytuł">
+            </div>
+
+            <div>
+                <textarea id="content" required="required" th:field="${blog.content}" placeholder="Tekst"></textarea>
+            </div>
+
+            <div>
+                <input type="file" th:name="image">
+            </div>
+
+            <div>
+                <button type="submit">Dodaj</button>
+            </div>
+        </form>
+    </div>
+
+</body>
+
+</html>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&family=Poppins:wght@400;500;600&display=swap');
+
+    * {
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+        font-size: medium;
+    }
+
+    body {
+        background: linear-gradient(120deg, #2980b9, #8e44ad);
+    }
+
+    /* .navB ul {
+        border-radius: 10px;
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background: linear-gradient(120deg, #48a1a7, #9ca754);
+    }
+
+    .navB li {
+        margin: 1px;
+        float: left;
+    }
+
+    .navB li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+
+    .navB li a:hover {
+        background-color: rgb(17, 17, 17);
+    } */
+
+    .center {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        right: 0px;
+        transform: translate(-50%, -50%);
+        background: linear-gradient(120deg, #e7eac4, #868783);
+        width: 400px;
+        padding: 20px 0;
+        border-radius: 10px;
+    }
+
+    form {
+        padding: 0 40px;
+        box-sizing: border-box;
+        margin-top: auto;
+    }
+
+    div {
+        text-align: center;
+    }
+
+    input,
+    label,
+    button,
+    textarea {
+        margin-top: 2%;
+        width: 100%;
+    }
+
+    button {
+        margin-top: 5%;
+    }
+</style>

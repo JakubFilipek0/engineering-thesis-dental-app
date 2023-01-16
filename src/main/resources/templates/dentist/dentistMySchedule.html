@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Mój plan</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+
+<body>
+    <div class="navB">
+        <ul th:replace="navBar :: navBar"></ul>
+    </div>
+
+    <div class="outter">
+        <div class="inner">
+            <h1 style="font-size: 30px;
+            color: white;
+            background: black;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            margin-bottom: 10px;">Mój plan</h1>
+
+            <div class="formInner">
+                <strong>Dodaj termin</strong>
+                <form th:action="@{/dentist/schedule/save}" th:object="${scheduleForm}" method="POST">
+                    <label style="margin-top: 10px; margin-bottom: 10px;">Data</label>
+                    <br>
+                    <input style="margin-bottom: 10px; width: 80%;" type="date" id="date" required="required" th:field="${scheduleForm.scheduleDate}">
+                    <br>
+                    <label>Godzina</label>
+                    <br>
+                    <select th:field="${scheduleForm.scheduleHour}" style="margin-bottom: 10px; width: 80%;">
+                        <option th:each="hourList : ${hourList}" th:text="${hourList}" th:value="${hourList}">
+                        </option>
+                    </select>
+                    <br>
+                    <button type="submit" style="margin-bottom: 10px; width: 80%;">Zapisz</button>
+                </form>
+            </div>
+
+
+
+            <div class="inner2">
+                <table>
+                    <thead>
+                        <tr>
+                            <th><a style="color: white;"
+                                    th:href="@{'/dentist/mySchedule/' + ${currentPage} + '?sortField=scheduleDate&sortDir=' + ${reverseSortDir}}">Data</a>
+                            </th>
+                            <th><a style="color: white;"
+                                    th:href="@{'/dentist/mySchedule/' + ${currentPage} + '?sortField=scheduleHour&sortDir=' + ${reverseSortDir}}">Godzina</a>
+                            </th>
+                            <th><a style="color: white;"
+                                    th:href="@{'/dentist/mySchedule/' + ${currentPage} + '?sortField=state&sortDir=' + ${reverseSortDir}}"></a>Status
+                            </th>
+                            <th>Akcja</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="schedule : ${schedule}">
+                            <td th:text="${#dates.format(schedule.scheduleDate, 'dd-MM-yyyy')}"></td>
+                            <td th:text="${schedule.scheduleHour}"></td>
+                            <td th:text="${schedule.state}"></td>
+                            <td>
+                                <span th:if="${schedule.state == 'RESERVED'}"><a>-</a></span>
+                                <span th:if="${schedule.state == 'OPEN'}"><a type="button"
+                                        th:href="@{/dentist/mySchedule/delete/{scheduleDentistsId}(scheduleDentistsId=${schedule.scheduleDentistsId})}"
+                                        class="btn">Usuń</a>
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div style="text-align: center;">
+        <footer>
+            <div style="color: white;">
+                Strona [[${currentPage}]] z [[${totalPages}]]
+            </div>
+
+            <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+                <a style="color: white;"
+                    th:href="@{'/dentist/mySchedule/' + ${i} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
+                &nbsp; &nbsp;
+            </span>
+        </footer>
+    </div>
+
+</body>
+
+</html>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&family=Poppins:wght@400;500;600&display=swap');
+
+    * {
+        font-size: medium;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+    }
+
+    body {
+        background: linear-gradient(120deg, #2980b9, #8e44ad);
+    }
+
+    .outter {
+        width: 100%;
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .inner {
+        display: inline-block;
+        border-radius: 10px;
+        width: 50%;
+
+    }
+
+    .formInner {
+        background: #e7eac4;
+    }
+
+    .inner2 {
+        display: inline-block;
+        background: #e7eac4;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    table,
+    th,
+    td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+
+    th,
+    td {
+        padding: 10px;
+        text-align: center;
+    }
+
+    th {
+        background-color: black;
+        color: white;
+        width: 50%;
+    }
+
+    td {
+        background-color: #e7eac4;
+    }
+
+    .btn {
+        background-color: red;
+        color: white;
+        border-radius: 2px;
+        text-decoration: none;
+    }
+</style>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Logowanie</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+
+<body>
+    <div class="navB">
+        <ul th:replace="navBar :: navBar"></ul>
+    </div>
+
+    <div class="outter">
+        <div class="inner">
+            <h1 style="font-size: 30px;
+            color: white;
+            background: black;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            margin-bottom: 10px;">Logowanie</h1>
+            <div class="formInner">
+                <form name="f" th:action="@{/login}" method="POST">
+                    <div th:if="${param.error}" class="alert alert-error">
+                        <small style="color: white; background-color: red;" class="incorrect">
+                            Nieprawidłowa nazwa użytkownika lub hasło</small>
+                    </div>
+                    <div th:if="${param.logout}" class="alert alert-success">
+                        <small style="color: white; background-color: green;" class="logout">Zostałeś wylogowany</small>
+                    </div>
+                    <input style="margin-bottom: 10px; width: 80%; margin-top: 10px;" type="text" id="username" name="username"
+                        placeholder="Nazwa użytkownika" />
+                    <input style="margin-bottom: 10px; width: 80%;" type="password" id="password" name="password"
+                        placeholder="Hasło" />
+                    <input type="submit" value="Zaloguj się" style="margin-bottom: 10px; width: 80%;">
+                </form>
+
+                <form th:action="@{/register}" method="GET">
+                    <div>
+                        <input style="margin-bottom: 10px; width: 80%" type="submit" value="Nie masz konta? Zarejestruj się">
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+
+</html>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&family=Poppins:wght@400;500;600&display=swap');
+
+    * {
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+        font-size: medium;
+    }
+
+    body {
+        background: linear-gradient(120deg, #2980b9, #8e44ad);
+    }
+
+    .outter {
+        width: 100%;
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .inner {
+        display: inline-block;
+        border-radius: 10px;
+        width: 30%;
+
+    }
+
+    .formInner {
+        background: #e7eac4;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+</style>

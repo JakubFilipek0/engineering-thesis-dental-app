@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+
+<body>
+    <div class="navB">
+        <ul th:replace="navBar :: navBar"></ul>
+    </div>
+
+    <div class="outter">
+        <div class="inner">
+            <h1>Gabinet stomatologiczny PBŚ</h1>
+            <div style="margin-left: 10px; margin-right: 10px;">
+                PBŚ to klinika stomatologiczna znajdująca się w Fordonie, czyli jednej z bydgoskich dzielnic.
+                Przynależy ona do jednej z największych uczelni w Bydgoszczy. Naszą klinikę tworzy wyspecjalizowany
+                zespół
+                ludzi z pasją, który zadba o zdrowie Twoich zębów oraz komfort wizyty. Stomatolodzy są gotowi
+                podjąc się niemożliwego zaczynając od wybielania kończąc na skomplikowanych zabiegach chirurgicznych.
+                <br>
+                <img src="../static/images/home1.jpg" width="75%" style="margin-top: 10px; border-radius: 10px; margin-bottom: 10px;" th:src="@{images/home1.jpg}"/>
+                <br>
+                <h1><strong>Dlaczego warto nas wybrać?</strong></h1>
+                Nasz wykwalifikowany zespół dzięki najnowocześniejszemu sprzętowi
+                i zaawansowanym metodom zadba o Twój komfort podczas wizyty.
+                Zapomnisz o bólu lub strachu związanym z wizytą u dentysty.
+                Nasi dentyści posiadają również odpowiednie podejście do młodszych pacjentów,
+                dzięki czemu nawet dzieci odwiedzają nasz gabinet z przyjemnością.
+                <br>
+                <img src="../static/images/home2.jpg" width="75%" style="margin-top: 10px; border-radius: 10px; margin-bottom: 10px;" th:src="@{images/home2.jpg}"/>
+                <h1><strong>Jak przebiega wizyta?</strong></h1>
+                Wizyta w naszej klinice rozpoczyna się od zarezerwowania terminu online.
+                <br>
+                W dzień wizyty zalecamy przybycie na miejsce najlepiej 30 minut przed umówioną godziną.
+                <br>
+                Na miejscu oferujemy poczekalnię z recepcją*, w której znajduje się automat z wodą, strefa relaksu oraz
+                kącik prasowy.
+                <br>
+                O umówionej godzinie stomatolog osobiście zaprosi Ciebie do swojego gabientu.
+                <br>
+                Dalsza część wizyty zostanie przedstawiona przez stomatologa na miejscu w gabinecie.
+                <br>
+                <label style="color: red;">*W recepcji znajduje się nasz pracownik, który chętnie odpowie na Twoje pytania.</label>  
+
+
+                
+            </div>
+            <h1 style="margin-left: 10px;">Gdzie nas znaleźć?</h1>
+            <div style="margin-left: 10px; margin-right: 10px;">
+                Numer telefonu: +48 123-456-789
+                <br>
+                Adres e-mail: stomatologiapbs@pbs.edu.pl
+                <br>
+                Adres:
+                <br>
+            </div>
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5691.8565393374365!2d18.129176635942013!3d53.14374562302924!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470313b103a9ea1d%3A0x2a29c87a5d2749d5!2sPolitechnika%20Bydgoska%20im.%20Jana%20i%20J%C4%99drzeja%20%C5%9Aniadeckich!5e0!3m2!1spl!2spl!4v1669911767181!5m2!1spl!2spl"
+                width="95%" height="75%" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&family=Poppins:wght@400;500;600&display=swap');
+
+    * {
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+        font-size: medium;
+    }
+
+    body {
+        background: linear-gradient(120deg, #2980b9, #8e44ad);
+    }
+
+    .outter {
+        width: 100%;
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .inner {
+        display: inline-block;
+        width: 50%;
+        background: white;
+        border-radius: 10px;
+    }
+</style>

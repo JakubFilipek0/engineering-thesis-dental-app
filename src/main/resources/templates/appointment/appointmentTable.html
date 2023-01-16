@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Terminy</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+
+<body>
+    <div class="navB">
+        <ul th:replace="navBar :: navBar"></ul>
+    </div>
+
+    <div class="outter">
+
+        <div class="inner">
+            <div>
+                <form th:action="@{/appointment/chooseDentist/1}" method="get">
+                    <input type="hidden" name="sortField" th:value="${sortField}">
+                    <input type="hidden" name="sortDir" th:value="${sortDir}">
+                    Wybierz datę:
+                    <br>
+                    <input type="date" style="margin-top: 10px; width: 90%;" th:name="selectedDate" required="required">
+                    <br>
+                    <input type="submit" style="margin-top: 10px; width: 90%" value="Szukaj">
+                </form>
+            </div>
+
+            <br>
+
+            <div>
+                Wybrana data: [[${#dates.format(dateSchedule, 'dd-MM-yyyy')}]]
+                <br>
+                Liczba terminów: [[${numberScheduleDentists}]]
+            </div>
+        </div>
+
+        <div class="inner2">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Stomatolog</th>
+                        <th>Godzina</th>
+                        <th>Akcja</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="schedule : ${schedule}">
+                        <td th:text="${schedule.dentist.name + ' ' + schedule.dentist.surname}">Marek Marek Marek </td>
+                        <td th:text="${schedule.scheduleHour}">aasdasd</td>
+                        <td><a class="btn" type="button"
+                                th:href="@{/appointment/chooseDentist/details/{scheduleDentistsId}(scheduleDentistsId=${schedule.scheduleDentistsId})}">Rezerwuję</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="outter">
+
+    </div>
+</body>
+
+</html>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&family=Poppins:wght@400;500;600&display=swap');
+
+    * {
+        font-size: medium;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+    }
+
+    body {
+        background: linear-gradient(120deg, #2980b9, #8e44ad);
+    }
+
+    .outter {
+        width: 100%;
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .inner {
+        display: inline-block;
+        width: 50%;
+        background: white;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        background: black;
+        color: white;
+        /* background: linear-gradient(120deg, #e7eac4, #868783); */
+        margin-bottom: 10px;
+    }
+
+    .inner2 {
+        display: inline-block;
+        width: 50%;
+    }
+
+    table,
+    th,
+    td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+
+    th,
+    td {
+        padding: 10px;
+        text-align: center;
+    }
+
+    th {
+        background-color: black;
+        color: white;
+        width: 50%;
+    }
+
+    td {
+        background-color: #e7eac4;
+    }
+
+    .btn {
+        background-color: green;
+        color: white;
+        border-radius: 2px;
+        text-decoration: none;
+    }
+</style>

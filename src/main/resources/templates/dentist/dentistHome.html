@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Profil dentysty</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+
+<body>
+
+    <div class="navB">
+        <ul th:replace="navBar :: navBar"></ul>
+    </div>
+
+    <div class="outter">
+        <div class="inner">
+            <div style="color: white; font-size: 30px;">
+                Witaj [[${currentUser}]]
+            </div>
+            <h1 style="font-size: 30px;
+            color: white;
+            background: black;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            margin-bottom: 10px;">Oczekujące wizyty</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <!-- <th><a style="color: white;" th:href="@{'/dentist/mySchedule/' + ${currentPage} + '?sortField=scheduleDate&sortDir=' + ${reverseSortDir}}">Data</a></th> -->
+                        <th><a style="color: white;"
+                                th:href="@{'/dentist/' + ${currentPage} + '?sortField=dateOfAppointment&sortDir=' + ${reverseSortDir}}">Data</a>
+                        </th>
+                        <th><a style="color: white;"
+                                th:href="@{'/dentist/' + ${currentPage} + '?sortField=hourOfAppointment&sortDir=' + ${reverseSortDir}}">Godzina</a>
+                        </th>
+                        <th><a style="color: white;"
+                                th:href="@{'/dentist/' + ${currentPage} + '?sortField=user&sortDir=' + ${reverseSortDir}}">Pacjent</a>
+                        </th>
+                        <th>Powód</th>
+                        <th>Status</th>
+                        <th>Akcja</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="appointments : ${appointments}">
+                        <td th:text="${#dates.format(appointments.dateOfAppointment, 'dd-MM-yyyy')}"></td>
+                        <td th:text="${appointments.hourOfAppointment}"></td>
+                        <td th:text="${appointments.user.name + ' ' + appointments.user.surname}"></td>
+                        <td th:text="${appointments.purpose}"></td>
+                        <td th:text="${appointments.status}"></td>
+                        <td>
+                            <span th:if="${appointments.status == 'OCZEKUJĄCY'}">
+                                <a class="btn" type="button"
+                                    th:href="@{/dentist/deleteAppointment/{appointmentId}(appointmentId=${appointments.appointmentId})}">Odwołaj</a>
+                                <a class="btn2" type="button"
+                                    th:href="@{/dentist/appointment/details/{appointmentId}(appointmentId=${appointments.appointmentId})}">Szczegóły</a>
+                            </span>
+                            <span th:if="${appointments.status == 'ODBYTA'}">
+                                <a>-</a>
+                            </span>
+                            <span th:if="${appointments.status == 'ODWOŁANO'}">
+                                <a>-</a>
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <p style="clear: both;"></p>
+
+    <div style="text-align: center;">
+        <footer>
+            <div style="color: white;">
+                Strona [[${currentPage}]] z [[${totalPages}]]
+                <!-- &nbsp; &nbsp; - &nbsp; -->
+            </div>
+
+            <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+                <a style="color: white;"
+                    th:href="@{'/dentist/' + ${i} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
+                &nbsp; &nbsp;
+            </span>
+        </footer>
+    </div>
+
+</body>
+
+</html>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&family=Poppins:wght@400;500;600&display=swap');
+
+    * {
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+        font-size: medium;
+    }
+
+    body {
+        background: linear-gradient(120deg, #2980b9, #8e44ad);
+    }
+
+    .outter {
+        width: 100%;
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .inner {
+        display: inline-block;
+        border-radius: 10px;
+    }
+
+    table,
+    th,
+    td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+
+    th,
+    td {
+        padding: 10px;
+    }
+
+    th {
+        background-color: black;
+        color: white;
+    }
+
+    td {
+        background-color: #e7eac4;
+    }
+
+    .btn {
+        background-color: red;
+        color: white;
+        border-radius: 2px;
+        text-decoration: none;
+    }
+
+    .btn2 {
+        background-color: yellowgreen;
+        color: white;
+        border-radius: 2px;
+        text-decoration: none;
+    }
+</style>

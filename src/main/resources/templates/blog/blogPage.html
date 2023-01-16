@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Blog</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+
+<body>
+    <div class="navB">
+        <ul th:replace="navBar ::navBar"></ul>
+    </div>
+
+    <br>
+
+    <div class="outter">
+        <div class="inner">
+            <th:block th:each="blogs : ${blogs}">
+                <h1 th:text="${blogs.title}" style="font-size: 30px;">Tytuł</h1>
+                <p th:text="${blogs.dateAdd}">Data</p>
+                <img th:src="${'/uploads/' + blogs.titleImage}" width="75%" height="75%"
+                    style="margin-top: 10px; border-radius: 10px; margin-bottom: 10px;">
+                <br>
+                [[${blogs.content}]]
+        </div>
+        <p style="clear: both;"></p>
+        <p style="clear: both;"></p>
+        </th:block>
+    </div>
+
+    </div>
+
+
+    <p style="clear: both;"></p>
+
+    <div style="text-align: center;">
+        <footer>
+            <div style="color: white;">
+                Strona [[${currentPage}]] z [[${totalPages}]]
+            </div>
+
+            <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+                <a class="aFooter" th:href="@{'/blog/' + ${i}}">[[${i}]]</a>
+                &nbsp; &nbsp;
+            </span>
+        </footer>
+    </div>
+
+</body>
+
+</html>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&family=Poppins:wght@400;500;600&display=swap');
+
+    * {
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+        font-size: medium;
+    }
+
+    body {
+        background: linear-gradient(120deg, #2980b9, #8e44ad);
+    }
+
+    .outter {
+        width: 100%;
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .inner {
+        display: inline-block;
+        width: 70%;
+        color: white;
+        border-radius: 10px;
+    }
+</style>
