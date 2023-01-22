@@ -37,10 +37,10 @@ public class StudiaApplication {
 	@Bean
 	CommandLineRunner runner() {
 		return args -> {
-//			User admin = new User("admin", "Jan", "Kowalski", "admin", "admin");
-//			admin.setPassword(passwordEncoder.encode(admin.getPassword()));
-//			admin.setRole("ROLE_ADMIN");
-//			userService.setUser(admin);
+			User admin = new User("admin", "Jan", "Kowalski", "admin", "admin");
+			admin.setPassword(passwordEncoder.encode(admin.getPassword()));
+			admin.setRole("ROLE_ADMIN");
+			userService.setUser(admin);
 //
 //			User user = new User("user", "Jakub", "Filipek", "user", "user");
 //			user.setPassword(passwordEncoder.encode(user.getPassword()));
